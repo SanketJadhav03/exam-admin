@@ -5,9 +5,9 @@
     <div class="container-fluid">
         <div class="card mt-2">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h3>Festivals</h3>
+                <h3>Subjects</h3>
                 <div>
-                    <a href="/admin/festival/create" class="btn btn-primary">Create Festival</a>
+                    <a href="{{route('subject.create')}}" class="btn btn-primary">Create Subject</a>
                 </div>
             </div>
             <div class="card-datatable table-responsive">
@@ -68,102 +68,66 @@
                         </div>
                     </div>
                     <div class="row">
-                        @forelse ($festivals as $festival)
-                            <div class="col-md-3 col-sm-6 mb-4">
-                                <div class="card h-100 border-0 shadow-sm overflow-hidden">
-                                    <!-- Card with background image -->
-                                    <div class="card-body text-center p-0 position-relative"
-                                        style="background: linear-gradient(rgba(0, 0, 0, 0), rgba(0,0,0,0.3)), 
-                                                url('{{ $festival->image ? asset('uploads/festivals/' . $festival->image) : asset('path/to/default-image.jpg') }}');
-                                                background-size: cover;
-                                                background-position: center;
-                                                height: 300px;">
-
-                                        <!-- Content overlay with semi-transparent background -->
-                                        <div class="position-absolute bottom-0 start-0 end-0 p-1"
-                                            style="background: rgba(0, 0, 0, 0.1);">
-
-
-
-                                            <!-- Status Toggle -->
-                                            <div class="d-flex    text-white">
-
-
-                                                <span class="">
-                                                    <h5 class="text-white">
-                                                        <i
-                                                            class="fa fa-calendar fs-25 text-danger align-items-center ps-3 pe-1"></i>
-                                                        {{ \Carbon\Carbon::parse($festival->festival_date)->format('d M Y') }}
-                                                    </h5>
-                                                </span>
-                                            </div>
-                                            <div class="d-flex  justify-content-evenly   mb-2">
-
-                                                <div class="btn btn-sm btn-info me-2 rounded" data-bs-toggle="modal"
-                                                    data-bs-target="#imageModal"
-                                                    data-image="{{ asset('uploads/festivals/' . $festival->image) }}">
-                                                    <i class="fa fa-eye"></i>
-                                                </div>
-                                                <a href="/festival/edit/{{ $festival->id }}"
-                                                    class="btn btn-sm btn-primary me-2 rounded" title="Edit">
-                                                    <i class="fa fa-edit"></i>
-                                                </a>
-                                                <form action="/admin/festival/{{ $festival->id }}" method="POST"
-                                                    class="d-inline">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger"
-                                                        onclick="return confirm('Are you sure you want to delete this festival?')"
-                                                        title="Delete">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
-                                                </form>
-                                                <div class="me-4">
-                                                    <label class="switch switch-success">
-                                                        <input type="checkbox" data-id="{{ $festival->id }}"
-                                                            class="switch-input status-toggle"
-                                                            {{ $festival->status == 1 ? 'checked' : '' }}>
-                                                        <span class="switch-toggle-slider">
-                                                            <span class="switch-on">
-                                                                <i class="ti ti-check text-white"></i>
-                                                            </span>
-                                                            <span class="switch-off">
-                                                                <i class="ti ti-x text-white"></i>
-                                                            </span>
-                                                        </span>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- Featured badge (top right) -->
-
-                                        <span
-                                            class="position-absolute top-0 start-0 end-0 d-flex justify-content-between align-items-center"
-                                            style="background: rgba(0,0,0,0.1);">
-                                            <h5 class=" ps-2 pt-1 card-title text-white mb-2">{{ $festival->title }}</h5>
-                                            <div>
-                                                <input type="checkbox" class="form-check-input me-2 " id="flexCheckDefault"
-                                                    {{ $festival->feature == 1 ? 'checked' : '' }}>
-                                            </div>
-                                        </span>
-                                    </div>
-                                </div>
+    @forelse ($subjects as $subject)
+        <div class="col-md-3 col-sm-6 mb-4">
+            <div class="card h-100 border-0 shadow-sm overflow-hidden">
+                <div class="card-body text-center p-0 position-relative"
+                    style="background: linear-gradient(rgba(0, 0, 0, 0), rgba(0,0,0,0.3)), 
+                        url('{{ $subject->subject_image ? asset($subject->subject_image) : asset('assets/img/default.jpg') }}');
+                        background-size: cover;
+                        background-position: center;
+                        height: 300px;">
+                    
+                    <!-- Bottom Overlay -->
+                    <div class="position-absolute bottom-0 start-0 end-0 p-1" style="background: rgba(0, 0, 0, 0.3);">
+                        <div class="d-flex justify-content-evenly mb-2">
+                            <div class="btn btn-sm btn-info me-2 rounded" data-bs-toggle="modal"
+                                data-bs-target="#imageModal"
+                                data-image="{{ asset($subject->subject_image) }}">
+                                <i class="fa fa-eye"></i>
                             </div>
 
-                            @if ($loop->iteration % 4 == 0)
-                    </div>
-                    <div class="row">
-                        @endif
-                    @empty
-                        <div class="col-12">
-                            <div class="alert alert-info text-center">No festivals found</div>
+                            <a href="{{ route('subject.edit', $subject->subject_id) }}"
+                                class="btn btn-sm btn-primary me-2 rounded" title="Edit">
+                                <i class="fa fa-edit"></i>
+                            </a>
+
+                            <form action="{{ route('subject.destroy', $subject->subject_id) }}" method="POST"
+                                class="d-inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-danger"
+                                    onclick="return confirm('Are you sure you want to delete this subject?')"
+                                    title="Delete">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </form>
                         </div>
-                        @endforelse
                     </div>
 
+                    <!-- Title Overlay -->
+                    <span class="position-absolute top-0 start-0 end-0 d-flex justify-content-between align-items-center"
+                        style="background: rgba(0,0,0,0.2);">
+                        <h5 class="ps-2 pt-1 card-title text-white mb-2">{{ $subject->subject_name }}</h5>
+                    </span>
+                </div>
+            </div>
+        </div>
 
-                    <div class="row mx-2 mt-3">
+        @if ($loop->iteration % 4 == 0)
+</div><div class="row">
+        @endif
+    @empty
+        <div class="col-12">
+            <div class="alert alert-info text-center">No subjects found</div>
+        </div>
+    @endforelse
+</div>
+
+                    
+
+
+                    {{-- <div class="row mx-2 mt-3">
                         <div class="col-sm-12 col-md-6">
                             <div class="dataTables_info">
                                 Showing {{ $festivals->firstItem() }} to {{ $festivals->lastItem() }} of
@@ -177,7 +141,7 @@
                                 </ul>
                             </nav>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

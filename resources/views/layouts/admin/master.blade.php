@@ -115,15 +115,15 @@
                         </a>
                     </li>
                     
-                    <li class="menu-item {{ request()->routeIs('festivalList') || request()->routeIs('festivalPostList') ? 'active open' : '' }}">
+                    <li class="menu-item ">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons ti ti-confetti"></i> <!-- Festival icon -->
-                            <div data-i18n="Festival">Festival</div>
+                            <div data-i18n="Subjects">Subjects</div>
                         </a>
                         <ul class="menu-sub">
-                            <li class="menu-item {{ request()->routeIs('festivalList') ? 'active' : '' }}">
-                                <a href="/admin/festival" class="menu-link">
-                                    <div data-i18n="Festival">Festival</div>
+                            <li class="menu-item ">
+                                <a href="{{ route('subject.index')}}" class="menu-link">
+                                    <div data-i18n="Subjects">Subjects</div>
                                 </a>
                             </li>
                             <li class="menu-item {{ request()->routeIs('festivalPostList') ? 'active' : '' }}">

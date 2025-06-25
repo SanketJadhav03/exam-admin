@@ -12,6 +12,7 @@ use App\Http\Controllers\FestivalController;
 use App\Http\Controllers\FestivalPostController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\SubjectController;
 use App\Models\BusinessCategory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -78,13 +79,13 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/admin/business_sub_category/status', [BusinessSubCategoryController::class, "updateStatus"]);
   
     // Festival Routes and Controller 
-    Route::get('/admin/festival', [FestivalController::class, "index"])->name("festivalList");
-    Route::get('/admin/festival/create', [FestivalController::class, "create"]);
-    Route::post('/admin/festival/store', [FestivalController::class, "store"]);
-    Route::delete('/admin/festival/{id}', [FestivalController::class, "destroy"]);
-    Route::get('/festival/edit/{id}', [FestivalController::class, "edit"]);
-    Route::put('/admin/festival/update', [FestivalController::class, "update"]);
-    Route::post('/admin/festival/status', [FestivalController::class, "updateStatus"]);
+    // Route::get('/admin/festival', [FestivalController::class, "index"])->name("festivalList");
+    // Route::get('/admin/festival/create', [FestivalController::class, "create"]);
+    // Route::post('/admin/festival/store', [FestivalController::class, "store"]);
+    // Route::delete('/admin/festival/{id}', [FestivalController::class, "destroy"]);
+    // Route::get('/festival/edit/{id}', [FestivalController::class, "edit"]);
+    // Route::put('/admin/festival/update', [FestivalController::class, "update"]);
+    // Route::post('/admin/festival/status', [FestivalController::class, "updateStatus"]);
    
     // Festival Post Routes and Controller 
     Route::get('/admin/festival_post', [FestivalPostController::class, "index"])->name("festivalPostList");
@@ -128,4 +129,6 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/component', function () {
     return view('component.index');
 });
+
+Route::resource('subject', SubjectController::class);
 

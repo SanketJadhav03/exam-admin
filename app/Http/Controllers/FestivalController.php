@@ -24,7 +24,7 @@ class FestivalController extends Controller
             ->orderBy('festival_date')
             ->paginate(10);
 
-        return view('pages.festival.index', compact('festivals'));
+        return view('pages.subject.index', compact('festivals'));
     }
 
 

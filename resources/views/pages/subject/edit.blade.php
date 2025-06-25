@@ -1,15 +1,15 @@
 @extends('layouts.admin.master')
-@section('title', 'Festival Edit')
+@section('title', 'Subject Edit')
 @section('content')
     <div class="main-content app-content">
         <div class="main-container container-fluid">
             <div class="card mt-1">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h3>Edit Festival</h3>
-                    <a href="/admin/festival" class="btn btn-primary">Back to Festivals</a>
+                    <h3>Edit Subject</h3>
+                    <a href="/admin/festival" class="btn btn-primary">Back to Subject</a>
                 </div>
                 <div class="card-body">
-                    <form action="/admin/festival/update" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('subject.update',$subject->subject_id)}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="row">
@@ -29,9 +29,9 @@
 
                                                 <!-- Preview Section -->
                                                 <div id="previewContainer" class="mt-3 text-center"
-                                                    style="{{ $festival->image ? '' : 'display:none;' }}">
+                                                    style="{{ $subject->image ? '' : 'display:none;' }}">
                                                     <img id="previewImage"
-                                                        src="{{ $festival->image ? asset('uploads/festivals/' . $festival->image) : '#' }}"
+                                                        src="{{ $subject->image ? asset('uploads/subjects/' . $subject->image) : '#' }}"
                                                         alt="Preview" class="img-thumbnail shadow"
                                                         style="max-height: 200px; border-radius: 10px;">
                                                     <br>
@@ -49,48 +49,23 @@
                             <div class="col-6">
                                 <div class="form-group mb-3">
                                     <label class="form-label">Title</label>
-                                    <input type="hidden" class="form-control" name="id" value="{{ $festival->id }}"
+                                    <input type="hidden" class="form-control" name="id" value="{{ $subject->subject_id }}"
                                         placeholder="Enter festival name" required>
-                                    <input type="text" class="form-control" name="title" value="{{ $festival->title }}"
+                                    <input type="text" class="form-control" name="subject_name" value="{{ $subject->subject_name }}"
                                         placeholder="Enter festival name" required>
-                                    @error('title')
+                                    @error('subject_name')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
-                                <div class="form-group mb-3">
-                                    <label class="form-label">Festival Date</label>
-                                    <input type="date" class="form-control"  value="{{ $festival->festival_date }}" name="festival_date" placeholder="Enter festival name"
-                                        required>
-                                    @error('festival_date')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label class="form-label">Activation Date</label>
-                                    <input type="date" class="form-control"  value="{{ $festival->activation_date }}" name="activation_date" placeholder="Enter festival name"
-                                        required>
-                                    @error('activation_date')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label class="form-label">Status</label>
-                                    <select class="form-control" name="status" required>
-                                        <option value="1" {{ $festival->status == 1 ? 'selected' : '' }}>Active
-                                        </option>
-                                        <option value="0" {{ $festival->status == 0 ? 'selected' : '' }}>Inactive
-                                        </option>
-                                    </select>
-                                    @error('status')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
+                               
+                               
+            
                             </div>
                         </div>
 
 
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Update Festival</button>
+                            <button type="submit" class="btn btn-primary">Update Subject</button>
                         </div>
                     </form>
                 </div>
