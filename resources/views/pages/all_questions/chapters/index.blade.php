@@ -31,7 +31,7 @@
                         {{-- Add appropriate routes later --}}
                         <a href="{{ route('chapters.edit', $chapter->chapter_id) }}" class="btn btn-sm btn-primary">Edit</a>
                         <a href="{{route('chapters.destroy',$chapter->chapter_id)}}" class="btn btn-sm btn-danger">Delete</a>
-                        <a href="{{ route('chapters_questions.index', $chapter->chapter_id) }}" class="btn btn-sm btn-primary">Edit</a>
+                        <a href="{{ route('chapters_questions.index', $chapter->chapter_id) }}" class="btn btn-sm btn-primary">Questions</a>
                     </td>
                 </tr>
             @empty

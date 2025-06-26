@@ -13,15 +13,14 @@ use App\Http\Controllers\FestivalPostController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\SubjectController;
+use App\Http\Controllers\Admin\SubjectTopicController;
 use App\Http\Controllers\AllQuestionsController;
 use App\Http\Controllers\Api\ChapterApiController;
 use App\Http\Controllers\Api\SubjectApiController;
 use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\ChapterQuestionController;
-use App\Models\BusinessCategory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Auth::routes();
 
@@ -140,15 +139,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/chapters_delete/{chapter_id}', [ChapterController::class, 'destroy'])->name('chapters.destroy');
 
     Route::get('/admin/chapters_questions/{chapter_id}', [ChapterQuestionController::class, 'index'])->name('chapters_questions.index');
-
-
-    //Api Routes
-
-    Route::get('/subjects', [SubjectApiController::class, 'GetAllSubject']);
-    // http://your-domain.com/api/subjects
-
-    Route::get('/chapters_subject/{subject_id}', [ChapterApiController::class, 'getChaptersBySubject']);
-    // http://your-domain.com/api/chapters_subject/1
+    Route::get('/admin/chapters_questions_create/{chapter_id}', [ChapterQuestionController::class, 'create'])->name('chapters_questions.create');
+    Route::post('/admin/chapters_questions_store', [ChapterQuestionController::class, 'store'])->name('chapter_question.store');
+    
+   
 
 
 });
@@ -157,5 +151,6 @@ Route::get('/component', function () {
     return view('component.index');
 });
 
-Route::resource('subject', SubjectController::class);
+Route::resource('/subject', SubjectController::class);
+Route::resource('/subject-topic', SubjectTopicController::class);
 

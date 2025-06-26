@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Chapter;
+use App\Models\ChapterQuestion;
 use Illuminate\Http\Request;
 
 class ChapterApiController extends Controller
@@ -20,4 +21,6 @@ class ChapterApiController extends Controller
             'data' => $chapters
         ]);
     }
+
+    
 }

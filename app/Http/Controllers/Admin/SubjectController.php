@@ -5,20 +5,30 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Subject;
-use Mockery\Matcher\Subset;
+use App\Models\SubjectTopic;
+
+
 
 class SubjectController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        
         // Fetch all subjects from the database
-        $subjects = Subject::all();
+        $subjects = Subject::with('subjectTopics')->get();
+        if($request->is('api/*')|| $request->wantsJson()) {
+            return response([
+                'status'=>'true',
+                'message'=>'Subject Retriveing Successfully',
+                'data'=>$subjects,
+            ]);
+        }
 
-        // Return the view with the subjects data
         return view('pages.subject.index', compact('subjects'));
+        
     }
 
     /**

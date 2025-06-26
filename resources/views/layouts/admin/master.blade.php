@@ -127,8 +127,8 @@
                                 </a>
                             </li>
                             <li class="menu-item {{ request()->routeIs('festivalPostList') ? 'active' : '' }}">
-                                <a href="/admin/festival_post" class="menu-link">
-                                    <div data-i18n="Festival Post">Festival Post</div>
+                                <a href="{{route('subject-topic.index')}}" class="menu-link">
+                                    <div data-i18n="Subject Topic">Subject Topics</div>
                                 </a>
                             </li>
                         </ul>
