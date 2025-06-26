@@ -62,6 +62,14 @@
                                         background-position: center;
                                         height: 300px;">
 
+                                        @if($subjectTopic->subject_topic_pdf)
+                                    <a href="{{ asset('storage/' . $subjectTopic->subject_topic_pdf) }}" target="_blank"
+                                    class="position-absolute top-50 start-50 translate-middle text-white"
+                                    style="z-index: 10; font-size: 40px; text-shadow: 1px 1px 5px black;">
+                                        <i class="fa-solid fa-file-pdf"></i>
+                                    </a>
+                                @endif
+
                                     <!-- Content overlay with semi-transparent background -->
                                     <div class="position-absolute bottom-0 start-0 end-0 p-1"
                                         style="background: rgba(0, 0, 0, 0.1);">
@@ -131,21 +139,21 @@
                     <div colspan="5" class="text-center">No Post found</div>
                     @endforelse
                 </div>
-                <div class="row mx-2 mt-3">
+                {{-- <div class="row mx-2 mt-3">
                     <div class="col-sm-12 col-md-6">
-                        {{-- <div class="dataTables_info">
-                            Showing {{ $festivalPosts->firstItem() }} to {{ $festivalPosts->lastItem() }} of
-                            {{ $festivalPosts->total() }} entries
-                        </div> --}}
+                        <div class="dataTables_info">
+                            Showing {{ $subjectTopics->firstItem() }} to {{ $subjectTopics->lastItem() }} of
+                            {{ $subjectTopics->total() }} entries
+                        </div>
                     </div>
                     <div class="col-sm-12 col-md-6">
                         <nav aria-label="Page navigation">
-                            {{-- <ul class="pagination justify-content-end">
-                                {{ $festivalPosts->onEachSide(1)->links('pagination::bootstrap-4') }}
-                            </ul> --}}
+                            <ul class="pagination justify-content-end">
+                                {{ $subjectTopics->onEachSide(1)->links('pagination::bootstrap-4') }}
+                            </ul>
                         </nav>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

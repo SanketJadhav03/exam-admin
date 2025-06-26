@@ -13,7 +13,7 @@ class SubjectTopic extends Model
     'subject_id',
     'subject_topic_name',
     'subject_status',
-    'topic_pdf',
+    'subject_topic_pdf',
 ];
 
     /**
