@@ -12,13 +12,21 @@ class SubjectController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        
         // Fetch all subjects from the database
         $subjects = Subject::all();
+        if($request->is('api/*')|| $request->wantsJson()) {
+            return response([
+                'status'=>'true',
+                'message'=>'Subject Retriveing Successfully',
+                'data'=>$subjects,
+            ]);
+        }
 
-        // Return the view with the subjects data
         return view('pages.subject.index', compact('subjects'));
+        
     }
 
     /**

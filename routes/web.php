@@ -13,6 +13,7 @@ use App\Http\Controllers\FestivalPostController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\SubjectController;
+use App\Http\Controllers\Admin\SubjectTopicController;
 use App\Models\BusinessCategory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -130,5 +131,6 @@ Route::get('/component', function () {
     return view('component.index');
 });
 
-Route::resource('subject', SubjectController::class);
+Route::resource('/subject', SubjectController::class);
+Route::resource('/subject-topic', SubjectTopicController::class);
 

@@ -1,5 +1,5 @@
 @extends('layouts.admin.master')
-@section('title', 'Festival Create')
+@section('title', 'Subject Create')
 @section('content')
     <div class="container-fluid ">
         <div class="card mt-2">
@@ -47,8 +47,8 @@
 
                                     <div class="card-body ">
                                         Image ( 1080px X 1080px )
-                                        <input type="file" class="form-control" name="image" id="imageInput"
-                                            accept="image/png, image/jpeg, image/gif">
+                                        <input type="file" class="form-control" name="subject_image" id="imageInput"
+                                            accept="subject_image/png, subject_image/jpeg, subject_image/gif , subject_image/jpg">
 
                                         @error('image')
                                             <div class="text-danger mt-2">{{ $message }}</div>

@@ -4,19 +4,19 @@
     <div class="container-fluid">
         <div class="card mt-2">
             <div class=" card-header d-flex justify-content-between align-items-center">
-                <h4>Festival Post</h4>
+                <h4>Subject Topics</h4>
                 {{-- Filter by festival  --}}
                 <div class="d-flex align-items-center">
                     <select id="select2Basic" class="select2 form-select form-select-lg me-2" data-allow-clear="true"
                         name="festival_id">
-                        <option value="">Select Festival</option>
-                        @foreach ($festivals as $festival)
-                            <option value="{{ $festival->id }}">{{ $festival->title }}</option>
+                        <option value="">Select Subject</option>
+                        @foreach ($subjectTopics as $subjectTopic)
+                            <option value="{{ $subjectTopic->subject->subject_id }}">{{ $subjectTopic->subject->subject_name }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div>
-                    <a href="/admin/festival_post/create" class="btn btn-primary">Create Festival Post</a>
+                    <a href="{{route('subject-topic.create')}}" class="btn btn-primary">Add New Topic</a>
                 </div>
             </div>
             <div class="card-body">
@@ -25,6 +25,15 @@
                         <div class="alert alert-success text-center mx-4 w-50 ">
                             {{ session('success') }}
                         </div>
+                        <script>
+                            // Hide success message after 3 seconds
+                            setTimeout(function() {
+                                var alertBox = document.getElementById('successAlert');
+                                if (alertBox) {
+                                    alertBox.style.display = 'none';
+                                }
+                            }, 3000); // 3000ms = 3 seconds
+                        </script>
                     </div>
                 @endif
                 @if (session('warning'))
@@ -42,13 +51,13 @@
                     </div>
                 @endif
                 <div class="row gy-4 mb-4">
-                    @forelse ($festivalPosts as $festivalPost)
+                    @forelse ($subjectTopics as $subjectTopic)
                         <div class="col-md-3 col-sm-6 mb-4">
                             <div class="card h-100 border-0 shadow-sm overflow-hidden">
                                 <!-- Card with background image -->
                                 <div class="card-body text-center p-0 position-relative"
                                     style="background: linear-gradient(rgba(0, 0, 0, 0), rgba(0,0,0,0.3)), 
-                                        url('{{ $festivalPost->post_image ? asset('uploads/festival_post/' . $festivalPost->post_image) : asset('path/to/default-image.jpg') }}');
+                                        
                                         background-size: cover;
                                         background-position: center;
                                         height: 300px;">
@@ -62,30 +71,30 @@
                                         <!-- Status Toggle -->
                                         <div class="d-flex justify-content-between mb-2">
 
-                                            <div class="btn btn-sm btn-info me-2 rounded" data-bs-toggle="modal"
+                                            {{-- <div class="btn btn-sm btn-info me-2 rounded" data-bs-toggle="modal"
                                                 data-bs-target="#imageModal"
                                                 data-image="{{ asset('uploads/festival_post/' . $festivalPost->post_image) }}">
                                                 <i class="fa fa-eye"></i>
-                                            </div>
-                                            <a href="/festival_post/edit/{{ $festivalPost->id }}"
+                                            </div> --}}
+                                            <a href="{{route('subject-topic.edit' , $subjectTopic->subject_child_id)}}"
                                                 class="btn btn-sm btn-primary me-2 rounded" title="Edit">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                            <form action="/admin/festival_post/{{ $festivalPost->id }}" method="POST"
+                                            <form action="{{route('subject-topic.destroy' , $subjectTopic->subject_child_id )}}" method="POST"
                                                 class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-danger"
-                                                    onclick="return confirm('Are you sure you want to delete this festival?')"
+                                                    onclick="return confirm('Are you sure you want to delete this Topic?')"
                                                     title="Delete">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>
                                             <div class="me-4">
                                                 <label class="switch switch-success">
-                                                    <input type="checkbox" data-id="{{ $festivalPost->id }}"
+                                                    <input type="checkbox" data-id="{{ $subjectTopic->subject_child_id }}"
                                                         class="switch-input status-toggle"
-                                                        {{ $festivalPost->status == 1 ? 'checked' : '' }}>
+                                                        {{ $subjectTopic->subject_topic_status == 1 ? 'checked' : '' }}>
                                                     <span class="switch-toggle-slider">
                                                         <span class="switch-on">
                                                             <i class="ti ti-check text-white"></i>
@@ -104,11 +113,11 @@
                                     <span
                                         class="position-absolute top-0 start-0 end-0 d-flex justify-content-between align-items-center"
                                         style="background: rgba(0,0,0,0.1);">
-                                        <h5 class=" ps-2 pt-1 card-title text-white mb-2">{{ $festivalPost->title }}</h5>
-                                        <div>
+                                        <h5 class=" ps-2 pt-1 card-title text-white mb-2">{{ $subjectTopic->subject_topic_name }}</h5>
+                                        {{-- <div>
                                             <input type="checkbox" class="form-check-input me-2 " id="flexCheckDefault"
                                                 {{ $festivalPost->paid == 1 ? 'checked' : '' }}>
-                                        </div>
+                                        </div> --}}
                                     </span>
                                 </div>
                             </div>
@@ -124,16 +133,16 @@
                 </div>
                 <div class="row mx-2 mt-3">
                     <div class="col-sm-12 col-md-6">
-                        <div class="dataTables_info">
+                        {{-- <div class="dataTables_info">
                             Showing {{ $festivalPosts->firstItem() }} to {{ $festivalPosts->lastItem() }} of
                             {{ $festivalPosts->total() }} entries
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="col-sm-12 col-md-6">
                         <nav aria-label="Page navigation">
-                            <ul class="pagination justify-content-end">
+                            {{-- <ul class="pagination justify-content-end">
                                 {{ $festivalPosts->onEachSide(1)->links('pagination::bootstrap-4') }}
-                            </ul>
+                            </ul> --}}
                         </nav>
                     </div>
                 </div>
@@ -145,7 +154,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="imageModalLabel">Festival Image</h5>
+                    <h5 class="modal-title" id="imageModalLabel">Topic Image</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center">

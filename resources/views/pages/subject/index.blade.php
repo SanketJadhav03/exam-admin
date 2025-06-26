@@ -1,5 +1,5 @@
 @extends('layouts.admin.master')
-@section('title', 'Festival')
+@section('title', 'Subject List')
 
 @section('content')
     <div class="container-fluid">
