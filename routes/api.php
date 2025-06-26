@@ -4,7 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\SubjectTopicController;
+use App\Http\Controllers\API\BookmarkApiController;
 use App\Http\Controllers\Api\ChapterApiController;
+use App\Http\Controllers\API\ChapterBookmarkApiController;
 use App\Http\Controllers\API\ChapterQuestionApiController;
 use App\Http\Controllers\Api\SubjectApiController;
 
@@ -30,3 +32,6 @@ Route::get('/subject-topics',[SubjectTopicController::class, 'index']);
 
     Route::get('/chapter-questions/{chapter_id}', [ChapterQuestionApiController::class, 'getQuestionByChapter']);
     // /api/chapter-questions/5
+
+    Route::post('/bookmark', [BookmarkApiController::class, 'storeOrUpdate']);
+    // /api/bookmark

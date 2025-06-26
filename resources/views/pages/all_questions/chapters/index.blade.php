@@ -4,7 +4,9 @@
 @section('content')
 <div class="container mt-4">
     <h2 class="mb-4">Chapters List</h2>
-    <a href="{{route('chapter.create',$subject_id)}}" class="btn btn-success mb-3">+ Add Chapter</a> {{-- Add link later --}}
+    
+    <a href="{{route('chapter.create',$subject_id)}}" class="btn btn-success mb-3">+ Add Chapter</a> 
+    <a href="{{route('all_questions.index')}}" class="btn btn-black mb-3">Back To Subjects</a> 
     
     <table class="table table-bordered">
         <thead>

@@ -129,8 +129,10 @@ Route::middleware(['auth'])->group(function () {
      Route::put('/admin/business_post/update', [BusinessPostController::class, "update"]);
      Route::post('/admin/business_post/status', [BusinessPostController::class, "updateStatus"]);
 
+    //All Questions Routes
      Route::get('/admin/all_questions_index', [AllQuestionsController::class, 'index'])->name('all_questions.index');
 
+    //Chapter Routes
     Route::get('/admin/chapters/{subject_id}', [ChapterController::class, 'index'])->name('chapters.index');
     Route::get('/admin/chapters_create/{subject_id}', [ChapterController::class, 'create'])->name('chapter.create');
     Route::post('/admin/chapters_store', [ChapterController::class, 'store'])->name('chapters.store');
@@ -138,11 +140,15 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/admin/chapters_update/{chapter_id}', [ChapterController::class, 'update'])->name('chapters.update');
     Route::get('/admin/chapters_delete/{chapter_id}', [ChapterController::class, 'destroy'])->name('chapters.destroy');
 
+
+    //Chapter Question Routes
     Route::get('/admin/chapters_questions/{chapter_id}', [ChapterQuestionController::class, 'index'])->name('chapters_questions.index');
     Route::get('/admin/chapters_questions_create/{chapter_id}', [ChapterQuestionController::class, 'create'])->name('chapters_questions.create');
     Route::post('/admin/chapters_questions_store', [ChapterQuestionController::class, 'store'])->name('chapter_question.store');
-    
-   
+    Route::get('/admin/chapters_questions_edit/{id}', [ChapterQuestionController::class, 'edit'])->name('chapters_questions.edit');
+    Route::post('/admin/chapters_questions_update/{id}', [ChapterQuestionController::class, 'update'])->name('chapters_questions.update');
+    Route::delete('/admin/chapters_questions_delete/{id}', [ChapterQuestionController::class, 'destroy'])->name('chapters_questions.destroy');
+
 
 
 });
