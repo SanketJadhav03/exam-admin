@@ -36,4 +36,44 @@ class BookmarkApiController extends Controller
             'data' => $bookmark
         ]);
     }
+
+    public function getByUser($user_id)
+    {
+    $bookmarks = Questions_Bookmark::where('user_id', $user_id)->get();
+
+    if ($bookmarks->isEmpty()) {
+        return response()->json([
+            'status' => false,
+            'message' => 'No bookmarks found for this user.',
+        ], 404);
+    }
+
+    return response()->json([
+        'status' => true,
+        'message' => 'Bookmarks retrieved successfully.',
+        'data' => $bookmarks
+    ]);
+    }
+
+
+    public function destroy($id)
+{
+    $bookmark = Questions_Bookmark::find($id);
+
+    if (!$bookmark) {
+        return response()->json([
+            'status' => false,
+            'message' => 'Bookmark not found.'
+        ], 404);
+    }
+
+    $bookmark->delete();
+
+    return response()->json([
+        'status' => true,
+        'message' => 'Bookmark deleted successfully.'
+    ]);
+}
+
+
 }

@@ -35,3 +35,9 @@ Route::get('/subject-topics',[SubjectTopicController::class, 'index']);
 
     Route::post('/bookmark', [BookmarkApiController::class, 'storeOrUpdate']);
     // /api/bookmark
+
+    Route::get('/bookmarks/{user_id}', [BookmarkApiController::class, 'getByUser']);
+    // /api/bookmarks/1
+
+    Route::delete('/bookmark/{id}', [BookmarkApiController::class, 'destroy']);
+    // /api/bookmark/1
