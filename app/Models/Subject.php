@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+
 use Illuminate\Database\Eloquent\Model;
 
 class Subject extends Model
@@ -12,6 +13,6 @@ class Subject extends Model
 
     public function subjectTopics()
     {
-        return $this->belongsTo(Subject::class, 'subject_id');
+        return $this->hasMany(SubjectTopic::class, 'subject_id');
     }
 }

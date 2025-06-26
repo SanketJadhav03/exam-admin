@@ -6,7 +6,7 @@
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h3>Edit Subject Topic</h3>
                 <div>
-                    <a href="/admin/festival_post" class="btn btn-primary">Back to Topics</a>
+                    <a href="{{route('subject-topic.index')}}" class="btn btn-primary">Back to Topics</a>
                 </div>
             </div>
             <div class="card-body ">
@@ -33,7 +33,7 @@
                             </div>
                             <div class=" -group mb-3">
                                 <label class="form-label">Enter  Topic </label>
-                                <input type="text" class="form-control" name="subject_topic_name" value="{{ old('subject_topic_name') }}"
+                                <input type="text" class="form-control" name="subject_topic_name" value="{{  $subjectTopic->subject_topic_name }}"
                                     placeholder="Enter  Topic Name" required>
                                 @error('subject_topic_name')
                                     <div class="text-danger">{{ $message }}</div>

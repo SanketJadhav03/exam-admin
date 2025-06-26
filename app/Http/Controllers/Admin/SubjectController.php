@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Subject;
-use Mockery\Matcher\Subset;
+use App\Models\SubjectTopic;
+
+
 
 class SubjectController extends Controller
 {
@@ -16,7 +18,7 @@ class SubjectController extends Controller
     {
         
         // Fetch all subjects from the database
-        $subjects = Subject::all();
+        $subjects = Subject::with('subjectTopics')->get();
         if($request->is('api/*')|| $request->wantsJson()) {
             return response([
                 'status'=>'true',

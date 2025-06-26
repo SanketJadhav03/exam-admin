@@ -10,8 +10,8 @@
                     <select id="select2Basic" class="select2 form-select form-select-lg me-2" data-allow-clear="true"
                         name="festival_id">
                         <option value="">Select Subject</option>
-                        @foreach ($subjectTopics as $subjectTopic)
-                            <option value="{{ $subjectTopic->subject->subject_id }}">{{ $subjectTopic->subject->subject_name }}</option>
+                        @foreach ($subjects as $subject)
+                            <option value="{{ $subject->subject_id }}">{{ $subject->subject_name }}</option>
                         @endforeach
                     </select>
                 </div>

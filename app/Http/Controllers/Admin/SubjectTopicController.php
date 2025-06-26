@@ -15,7 +15,8 @@ class SubjectTopicController extends Controller
     public function index()
     {
         // Fetch all subject topics from the database
-        $subjectTopics = SubjectTopic::with('subject')->get();
+        $subjectTopics = SubjectTopic::all();
+        $subjects = Subject::all(); // Fetch all subjects for the dropdown
         // Eager load the subject relationship
 
         if (request()->is('api/*') || request()->wantsJson()) {
@@ -27,7 +28,7 @@ class SubjectTopicController extends Controller
         }
 
         // Return the view with the subject topics
-     return view('pages.subject-topic.index', compact('subjectTopics'));
+     return view('pages.subject-topic.index', compact('subjectTopics','subjects'));
     }
 
     /**
@@ -85,7 +86,23 @@ class SubjectTopicController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Validate the request data
+        $request->validate([
+            'subject_id' => 'required|exists:subjects,subject_id',
+            'subject_topic_name' => 'required|string|max:255',
+            'subject_topic_pdf' => 'nullable|mimes:pdf|max:10000',
+            'subject_topic_status' => 'required|boolean', // Adjust the validation rules as needed  
+        ]);
+
+        $subjectTopic = SubjectTopic::findOrFail($id);
+        $subjectTopic->update([
+            'subject_id' => $request->subject_id,
+            'subject_topic_name' => $request->subject_topic_name,
+            'subject_topic_pdf' => $request->file('subject_topic_pdf') ? $request->file('subject_topic_pdf')->store('topic_pdfs', 'public') : $subjectTopic->subject_topic_pdf,
+            'subject_topic_status' => $request->subject_status
+        ]);
+
+        return redirect()->route('subject-topic.index')->with('success', 'Subject topic updated successfully.');
     }
 
     /**
@@ -93,6 +110,16 @@ class SubjectTopicController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $subjectTopic = SubjectTopic::findOrFail($id);
+        $subjectTopic->delete();
+
+        if (request()->is('api/*') || request()->wantsJson()) {
+            return response()->json([
+                'status' => 'true',
+                'message' => 'Subject topic deleted successfully',
+            ]);
+        }
+
+        return redirect()->route('subject-topic.index')->with('success', 'Subject topic deleted successfully.');
     }
 }
