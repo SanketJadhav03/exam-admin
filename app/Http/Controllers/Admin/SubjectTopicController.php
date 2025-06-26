@@ -13,6 +13,23 @@ class SubjectTopicController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+     public function filterTopic(Request $request)
+{
+    $subjects = Subject::all();
+
+    // Apply filter if subject_id is selected
+    $query = SubjectTopic::query();
+    
+
+    if ($request->filled('subject_id')) {
+        $query->where('subject_id', $request->subject_id);
+    }
+
+    $subjectTopics = $query->get(); // or paginate() if you use pagination
+
+    return view('pages.subject-topic.index', compact('subjects', 'subjectTopics'));
+}
     public function index()
     {
         // Fetch all subject topics from the database
@@ -130,4 +147,20 @@ class SubjectTopicController extends Controller
 
         return redirect()->route('subject-topic.index')->with('success', 'Subject topic deleted successfully.');
     }
+
+
+    public function toggleStatus(Request $request)
+{
+    $topic = SubjectTopic::find($request->id);
+
+    if (!$topic) {
+        return response()->json(['status' => false, 'message' => 'Topic not found']);
+    }
+
+    $topic->subject_topic_status = $request->status;
+    $topic->save();
+
+    return response()->json(['status' => true, 'message' => 'Topic status updated']);
+}
+
 }

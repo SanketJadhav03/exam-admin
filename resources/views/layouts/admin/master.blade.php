@@ -535,7 +535,7 @@
                                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                                     data-bs-toggle="dropdown">
                                     <div style="border-radius: 50%; " class="avatar bg-light avatar-online justify-content-center align-items-center d-flex ">
-                                       {{Auth::user()->name[0]}}
+                                       {{-- {{Auth::user()->name[0]}} --}}
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
@@ -544,12 +544,12 @@
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 me-3">
                                                     <div style="border-radius: 50%; " class="avatar bg-light avatar-online justify-content-center align-items-center d-flex ">
-                                                        {{Auth::user()->name[0]}}
+                                                        {{-- {{Auth::user()->name[0]}} --}}
                                                      </div>
                                                 </div>
                                                 <div class="flex-grow-1">
                                                     <span class="fw-medium d-block">
-                                                        {{ Auth::user()->name }}
+                                                        {{-- {{ Auth::user()->name }} --}}
                                                     </span>
                                                     <small class="text-muted">Admin</small>
                                                 </div>

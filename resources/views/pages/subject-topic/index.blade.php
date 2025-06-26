@@ -7,7 +7,7 @@
                 <h4>Subject Topics</h4>
                 {{-- Filter by festival  --}}
                 <div class="d-flex align-items-center">
-                   <form method="GET" action="{{ route('subject-topic.index') }}" class="d-flex align-items-center">
+                   <form method="GET" action="{{ route('subject-topic.filterTopic') }}" class="d-flex align-items-center">
                         <select id="subjectFilter" name="subject_id" class="form-select form-select-lg me-2">
                             <option value="">Select Subject</option>
                             @foreach ($subjects as $subject)
@@ -161,7 +161,7 @@
         </div>
     </div>
     <!-- Image View Modal -->
-    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+    {{-- <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -176,47 +176,47 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
+   
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var imageModal = document.getElementById('imageModal');
-            var modalImage = document.getElementById('modalImage');
-
-            imageModal.addEventListener('show.bs.modal', function(event) {
-                var triggerImage = event.relatedTarget;
-                var imageUrl = triggerImage.getAttribute('data-image');
-                modalImage.src = imageUrl;
-            });
+    document.addEventListener('DOMContentLoaded', function () {
+        const subjectFilter = document.getElementById('subjectFilter');
+        subjectFilter.addEventListener('change', function () {
+            this.form.submit(); // auto-submit form
         });
-        document.addEventListener('DOMContentLoaded', function() {
-            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-            document.querySelectorAll('.status-toggle').forEach(toggle => {
-                toggle.addEventListener('change', function() {
-                    const festivalId = this.dataset.id;
-                    const isChecked = this.checked;
+        document.querySelectorAll('.status-toggle').forEach(toggle => {
+            toggle.addEventListener('change', function () {
+                const topicId = this.dataset.id;
+                const newStatus = this.checked ? 1 : 0;
 
-                    axios.post('/admin/festival_post/status', {
-                            id: festivalId,
-                            status: isChecked ? 1 : 0
-                        }, {
-                            headers: {
-                                'X-CSRF-TOKEN': csrfToken
-                            }
-                        })
-                        .then(response => {
-                            if (response.data.status == 1) {
-                                toastr.success(response.data.message);
-                            } else {
-                                toastr.warning(response.data.message);
-                            }
-                        })
-                        .catch(error => {
-                            toastr.error('Failed to update status.');
-                            this.checked = !isChecked; // rollback toggle
-                        });
+                axios.post('/admin/subject-topic/status', {
+                    id: topicId,
+                    status: newStatus
+                }, {
+                    headers: {
+                        'X-CSRF-TOKEN': csrfToken
+                    }
+                })
+                .then(response => {
+                    if (response.data.status) {
+                        toastr.success(response.data.message);
+                    } else {
+                        toastr.warning(response.data.message);
+                    }
+                })
+                .catch(error => {
+                    toastr.error('Something went wrong!');
+                    this.checked = !newStatus;
                 });
             });
         });
-    </script>
+    });
+</script>
+
 @endsection

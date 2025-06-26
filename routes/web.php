@@ -153,4 +153,6 @@ Route::get('/component', function () {
 
 Route::resource('/subject', SubjectController::class);
 Route::resource('/subject-topic', SubjectTopicController::class);
+Route::post('/admin/subject-topic/status', [SubjectTopicController::class, 'toggleStatus']);
+Route::get('/select-subject-topics', [SubjectTopicController::class, 'filterTopic'])->name('subject-topic.filterTopic');
 

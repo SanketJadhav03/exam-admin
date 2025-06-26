@@ -1,12 +1,16 @@
 <?php
 
+use App\Http\Controllers\Admin\StudentAuthController as AdminStudentAuthController;
+use App\Http\Controllers\Admin\StudentRegisterController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\SubjectTopicController;
 use App\Http\Controllers\Api\ChapterApiController;
 use App\Http\Controllers\API\ChapterQuestionApiController;
+use App\Http\Controllers\API\StudentAuthController;
 use App\Http\Controllers\Api\SubjectApiController;
+
 
 // Example API route
 Route::get('/hello', function () {
@@ -18,7 +22,7 @@ Route::get('/test', function () {
 
 
 Route::get('/subject-list', [SubjectController::class, 'index']);
-Route::get('/subject-topics',[SubjectTopicController::class, 'index']);
+Route::get('/subject-topic',[SubjectTopicController::class, 'index']);
 
 
 // Shivam's API routes
@@ -30,3 +34,9 @@ Route::get('/subject-topics',[SubjectTopicController::class, 'index']);
 
     Route::get('/chapter-questions/{chapter_id}', [ChapterQuestionApiController::class, 'getQuestionByChapter']);
     // /api/chapter-questions/5
+Route::prefix('student')->group(function () {
+    Route::get('google/login', [StudentRegisterController::class, 'redirectToGoogle']);
+    Route::get('google/callback', [StudentRegisterController::class, 'handleGoogleCallback']);
+});
+Route::get('/student/list', [StudentRegisterController::class, 'index']);
+Route::post('/student/register', [StudentRegisterController::class, 'store']);
