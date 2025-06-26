@@ -202,6 +202,12 @@
                             <div data-i18n="Language">Language</div>
                         </a>
                     </li>
+                    <li class="menu-item">
+                        <a href="{{route('all_questions.index')}}" class="menu-link">
+                            <i class="menu-icon tf-icons ti ti-language"></i> <!-- Language icon -->
+                            <div data-i18n="All Questions">All Questions</div>
+                        </a>
+                    </li>
 
                     <li class="menu-item {{ request()->routeIs('settings') ? 'active' : '' }}">
                         <a href="{{ route('settings') }}" class="menu-link">
