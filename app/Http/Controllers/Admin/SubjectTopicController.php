@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Subject;
 use App\Models\SubjectTopic;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class SubjectTopicController extends Controller
 {
@@ -43,25 +44,32 @@ class SubjectTopicController extends Controller
     /**
      * Store a newly created resource in storage.   
      */
-    public function store(Request $request )
-    {   // Validate the request data
-        
-        $request->validate([
-            'subject_id' => 'required|exists:subjects,subject_id',
-            'subject_topic_name' => 'required|string|max:255',
-            'subject_topic_pdf' => 'nullable|mimes:pdf|max:10000',
-            'subject_topic_status' => 'required|boolean', // Adjust the validation rules as needed  
-        ]);
+    public function store(Request $request)
+{
+    $request->validate([
+        'subject_id' => 'required|exists:subjects,subject_id',
+        'subject_topic_name' => 'required|string|max:255',
+        'subject_topic_pdf' => 'required|mimes:pdf|max:10000',
+        'subject_topic_status' => 'required|boolean',
+    ]);
 
-        SubjectTopic::create([
-            'subject_id' => $request->subject_id,
-            'subject_topic_name' => $request->subject_topic_name,
-            'subject_topic_pdf' => $request->file('subject_topic_pdf') ? $request->file('subject_topic_pdf')->store('topic_pdfs', 'public') : null,
-            'subject_topic_status' => $request->subject_status
-
-        ]);
-        return redirect()->route('subject-topic.index')->with('success', 'Subject topic created successfully.');
+    $pdfPath = null;
+    if ($request->hasFile('subject_topic_pdf')) {
+        $pdfPath = $request->file('subject_topic_pdf')->store('topic_pdfs', 'public');
     }
+    
+
+
+    SubjectTopic::create([
+        'subject_id' => $request->subject_id,
+        'subject_topic_name' => $request->subject_topic_name,
+        'subject_topic_pdf' => $pdfPath,
+        'subject_topic_status' => $request->subject_topic_status,
+    ]);
+
+    return redirect()->route('subject-topic.index')->with('success', 'Subject topic created successfully.');
+}
+
 
     /**
      * Display the specified resource.
