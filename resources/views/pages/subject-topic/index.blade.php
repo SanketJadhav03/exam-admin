@@ -7,13 +7,16 @@
                 <h4>Subject Topics</h4>
                 {{-- Filter by festival  --}}
                 <div class="d-flex align-items-center">
-                    <select id="select2Basic" class="select2 form-select form-select-lg me-2" data-allow-clear="true"
-                        name="festival_id">
-                        <option value="">Select Subject</option>
-                        @foreach ($subjects as $subject)
-                            <option value="{{ $subject->subject_id }}">{{ $subject->subject_name }}</option>
-                        @endforeach
-                    </select>
+                   <form method="GET" action="{{ route('subject-topic.index') }}" class="d-flex align-items-center">
+                        <select id="subjectFilter" name="subject_id" class="form-select form-select-lg me-2">
+                            <option value="">Select Subject</option>
+                            @foreach ($subjects as $subject)
+                                <option value="{{ $subject->subject_id }}" {{ request('subject_id') == $subject->subject_id ? 'selected' : '' }}>
+                                    {{ $subject->subject_name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </form>
                 </div>
                 <div>
                     <a href="{{route('subject-topic.create')}}" class="btn btn-primary">Add New Topic</a>

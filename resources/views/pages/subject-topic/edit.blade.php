@@ -18,19 +18,18 @@
                         <input type="hidden" name="id" value="{{ $subjectTopic->subject_child_id }}">
                        
                         <div class="col-6">
-                          <div class=" -group mb-3">
-                                <label class="form-label">Select Subject </label>
-                                <select id="select2Basic" class="select2 form-select form-select-lg"
-                                    data-allow-clear="true" name="subject_id" required>
-                                    @foreach ($subjects as $subject)
-                                    <option value="{{ $subject->subject_id }}"
-                                            {{ old('subject_id') == $subject->subject_id ? 'selected' : '' }}>
-                                            {{ $subject->subject_name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-
-                            </div>
+                         <div class="form-group mb-3">
+    <label class="form-label">Select Subject</label>
+    <select id="select2Basic" class="select2 form-select form-select-lg"
+        name="subject_id" required>
+        @foreach ($subjects as $subject)
+            <option value="{{ $subject->subject_id }}"
+                {{ (old('subject_id', $subjectTopic->subject_id ?? '') == $subject->subject_id) ? 'selected' : '' }}>
+                {{ $subject->subject_name }}
+            </option>
+        @endforeach
+    </select>
+</div>
                             <div class=" -group mb-3">
                                 <label class="form-label">Enter  Topic </label>
                                 <input type="text" class="form-control" name="subject_topic_name" value="{{  $subjectTopic->subject_topic_name }}"
