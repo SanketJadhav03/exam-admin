@@ -23,10 +23,10 @@ Route::get('/subject-topics',[SubjectTopicController::class, 'index']);
 
 // Shivam's API routes
     Route::get('/subjects', [SubjectApiController::class, 'GetAllSubject']);
-    // http://your-domain.com/api/subjects
+    // /api/subjects
 
     Route::get('/chapters_subject/{subject_id}', [ChapterApiController::class, 'getChaptersBySubject']);
-    // http://your-domain.com/api/chapters_subject/1
+    // /api/chapters_subject/1
 
-    Route::get('/chapter-questions/{chapter_id}', [ChapterQuestionApiController::class, 'getByChapter']);
+    Route::get('/chapter-questions/{chapter_id}', [ChapterQuestionApiController::class, 'getQuestionByChapter']);
     // /api/chapter-questions/5
