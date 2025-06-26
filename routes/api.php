@@ -28,5 +28,5 @@ Route::get('/subject-topics',[SubjectTopicController::class, 'index']);
     Route::get('/chapters_subject/{subject_id}', [ChapterApiController::class, 'getChaptersBySubject']);
     // http://your-domain.com/api/chapters_subject/1
 
-    Route::get('/chapter-questions/{chapter_id}', [ChapterQuestionApiController::class, 'getByChapter']);
+    Route::get('/chapter-questions/{chapter_id}', [ChapterQuestionApiController::class, 'getQuestionsByChapter']);
     // /api/chapter-questions/5
