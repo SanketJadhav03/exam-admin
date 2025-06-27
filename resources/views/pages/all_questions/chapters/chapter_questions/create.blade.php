@@ -2,19 +2,20 @@
 @section('title', 'Add Chapter Question')
 @section('content')
 
-<div class="container-fluid py-4">
+<div class="container-fluid py-3">
     <div class="row">
         <div class="col-12">
-            <div class="card shadow-lg">
-                <div class="card-header bg-gradient-primary text-white">
+            <div class="card shadow-sm">
+                <div class="card-header bg-gradient-primary text-white py-2">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h4 class="mb-0">Add New Question</h4>
-                        <a href="javascript:history.back()" class="btn btn-light btn-sm">
+                        <h5 class="mb-0">Add New Question</h5>
+                        <a href="{{ route('chapters_questions.index', ['chapter_id' => $chapterId, 'subject_id' => $subjectId]) }}" 
+                           class="btn btn-light btn-sm">
                             <i class="fas fa-arrow-left me-1"></i> Back
                         </a>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body p-3">
                     <form action="{{ route('chapter_question.store') }}" method="POST">
                         @csrf
 
@@ -22,83 +23,65 @@
                         <input type="hidden" name="subject_id" value="{{ $subjectId }}">
 
                         <!-- Question Field -->
-                        <div class="mb-4">
-                            <label for="question" class="form-label text-sm font-weight-bold">Question</label>
-                            <div class="input-group input-group-outline mb-3">
-                                <textarea name="question" id="question" class="form-control" rows="4" required
-                                          placeholder="Enter the question text"></textarea>
-                            </div>
+                        <div class="mb-3">
+                            <label class="form-label small font-weight-bold">Question</label>
+                            <input type="text" name="question" class="form-control form-control-sm" 
+                                   required placeholder="Enter question">
                         </div>
 
-                        <div class="row">
-                            <!-- Options Column 1 -->
+                        <div class="row g-2">
                             <div class="col-md-6">
-                                <div class="mb-4">
-                                    <label for="option_a" class="form-label text-sm font-weight-bold">Option A</label>
-                                    <div class="input-group input-group-outline mb-3">
-                                        <input type="text" name="option_a" id="option_a" class="form-control" required
-                                               placeholder="Enter option A text">
-                                    </div>
+                                <div class="mb-2">
+                                    <label class="form-label small font-weight-bold">Option A</label>
+                                    <input type="text" name="option_a" class="form-control form-control-sm" 
+                                           required placeholder="Option A">
                                 </div>
-
-                                <div class="mb-4">
-                                    <label for="option_b" class="form-label text-sm font-weight-bold">Option B</label>
-                                    <div class="input-group input-group-outline mb-3">
-                                        <input type="text" name="option_b" id="option_b" class="form-control" required
-                                               placeholder="Enter option B text">
-                                    </div>
+                                <div class="mb-2">
+                                    <label class="form-label small font-weight-bold">Option B</label>
+                                    <input type="text" name="option_b" class="form-control form-control-sm" 
+                                           required placeholder="Option B">
                                 </div>
                             </div>
-
-                            <!-- Options Column 2 -->
                             <div class="col-md-6">
-                                <div class="mb-4">
-                                    <label for="option_c" class="form-label text-sm font-weight-bold">Option C</label>
-                                    <div class="input-group input-group-outline mb-3">
-                                        <input type="text" name="option_c" id="option_c" class="form-control" required
-                                               placeholder="Enter option C text">
-                                    </div>
+                                <div class="mb-2">
+                                    <label class="form-label small font-weight-bold">Option C</label>
+                                    <input type="text" name="option_c" class="form-control form-control-sm" 
+                                           required placeholder="Option C">
                                 </div>
-
-                                <div class="mb-4">
-                                    <label for="option_d" class="form-label text-sm font-weight-bold">Option D</label>
-                                    <div class="input-group input-group-outline mb-3">
-                                        <input type="text" name="option_d" id="option_d" class="form-control" required
-                                               placeholder="Enter option D text">
-                                    </div>
+                                <div class="mb-2">
+                                    <label class="form-label small font-weight-bold">Option D</label>
+                                    <input type="text" name="option_d" class="form-control form-control-sm" 
+                                           required placeholder="Option D">
                                 </div>
                             </div>
                         </div>
 
                         <!-- Correct Answer -->
-                        <div class="mb-4">
-                            <label for="correct_answer" class="form-label text-sm font-weight-bold">Correct Answer</label>
-                            <div class="input-group input-group-outline mb-3">
-                                <select name="correct_answer" id="correct_answer" class="form-control" required>
-                                    <option value="">-- Select Correct Option --</option>
-                                    <option value="A">Option A</option>
-                                    <option value="B">Option B</option>
-                                    <option value="C">Option C</option>
-                                    <option value="D">Option D</option>
-                                </select>
-                            </div>
+                        <div class="mb-3">
+                            <label class="form-label small font-weight-bold">Correct Answer</label>
+                            <select name="correct_answer" class="form-select form-select-sm" required>
+                                <option value="">-- Select Correct Option --</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                            </select>
                         </div>
 
                         <!-- Explanation -->
-                        <div class="mb-4">
-                            <label for="explanation" class="form-label text-sm font-weight-bold">Explanation (Optional)</label>
-                            <div class="input-group input-group-outline mb-3">
-                                <textarea name="explanation" id="explanation" class="form-control" rows="3"
-                                          placeholder="Add explanation for the correct answer"></textarea>
-                            </div>
+                        <div class="mb-3">
+                            <label class="form-label small font-weight-bold">Explanation (Optional)</label>
+                            <input type="text" name="explanation" class="form-control form-control-sm"
+                                   placeholder="Brief explanation">
                         </div>
 
                         <!-- Form Actions -->
-                        <div class="d-flex justify-content-end mt-4">
-                            <button type="button" onclick="window.history.back()" class="btn btn-outline-secondary me-3">
+                        <div class="d-flex justify-content-end mt-3">
+                            <a href="{{ route('chapters_questions.index', ['chapter_id' => $chapterId, 'subject_id' => $subjectId]) }}" 
+                               class="btn btn-outline-secondary btn-sm me-2">
                                 <i class="fas fa-times me-1"></i> Cancel
-                            </button>
-                            <button type="submit" class="btn bg-gradient-primary">
+                            </a>
+                            <button type="submit" class="btn btn-primary btn-sm">
                                 <i class="fas fa-plus-circle me-1"></i> Add Question
                             </button>
                         </div>
@@ -110,19 +93,21 @@
 </div>
 
 <style>
-    .input-group.input-group-outline {
+    .card {
         border-radius: 8px;
-        transition: all 0.3s;
     }
-    .input-group.input-group-outline:focus-within {
-        box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
-    }
-    textarea.form-control {
-        min-height: 120px;
+    .form-control, .form-select {
+        font-size: 0.875rem;
+        padding: 0.25rem 0.5rem;
     }
     .form-label {
-        margin-bottom: 0.5rem;
-        display: block;
+        margin-bottom: 0.25rem;
+    }
+    .card-header {
+        padding: 0.75rem 1rem;
+    }
+    .card-body {
+        padding: 1rem;
     }
 </style>
 
