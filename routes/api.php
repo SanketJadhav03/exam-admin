@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\SubjectTopicController;
+use App\Http\Controllers\API\BookmarkApiController;
 use App\Http\Controllers\Api\ChapterApiController;
+use App\Http\Controllers\API\ChapterBookmarkApiController;
 use App\Http\Controllers\API\ChapterQuestionApiController;
 use App\Http\Controllers\API\StudentAuthController;
 use App\Http\Controllers\Api\SubjectApiController;
@@ -21,8 +23,8 @@ Route::get('/test', function () {
 });
 
 
-Route::get('/subject-list', [SubjectController::class, 'index']);
-Route::get('/subject-topic',[SubjectTopicController::class, 'index']);
+Route::get('/subject/list', [SubjectController::class, 'index']);
+Route::get('/subject/topic',[SubjectTopicController::class, 'index']);
 
 
 // Shivam's API routes
@@ -40,3 +42,12 @@ Route::prefix('student')->group(function () {
 });
 Route::get('/student/list', [StudentRegisterController::class, 'index']);
 Route::post('/student/register', [StudentRegisterController::class, 'store']);
+
+    Route::post('/bookmark', [BookmarkApiController::class, 'storeOrUpdate']);
+    // /api/bookmark
+
+    Route::get('/bookmarks/{user_id}', [BookmarkApiController::class, 'getByUser']);
+    // /api/bookmarks/1
+
+    Route::delete('/bookmark/{id}', [BookmarkApiController::class, 'destroy']);
+    // /api/bookmark/1

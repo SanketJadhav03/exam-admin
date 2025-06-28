@@ -11,9 +11,6 @@ class ChapterApiController extends Controller
 {
     public function getChaptersBySubject($subject_id)
     {
-        // $chapters = Chapter::where('subject_id', $subject_id)->where('status', 'active')
-        //     ->orderBy('chapter_id', 'asc')
-        //     ->get();
         $chapters = Chapter::select('chapters.*', 'subjects.subject_name')
         ->join('subjects', 'chapters.subject_id', '=', 'subjects.subject_id')
         ->where('chapters.subject_id', $subject_id)

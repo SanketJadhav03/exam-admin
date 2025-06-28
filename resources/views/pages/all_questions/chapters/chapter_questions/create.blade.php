@@ -7,7 +7,6 @@
         <div class="card-header">
             <h4>Add Chapter Question</h4>
         </div>
-        <h1>{{$subjectId}}</h1>
         <div class="card-body">
             <form action="{{ route('chapter_question.store') }}" method="POST">
                 @csrf
@@ -58,6 +57,9 @@
 
                 <button type="submit" class="btn btn-primary">Add Question</button>
             </form>
+            <a>
+                <button class="btn btn-secondary mt-3" onclick="window.history.back();">Back</button>
+            </a>
         </div>
     </div>
 </div>

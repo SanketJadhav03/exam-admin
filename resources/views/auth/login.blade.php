@@ -167,11 +167,11 @@
                 </div>
 
                <div class="text-center">
-                @if (Route::has('password.request'))
+                {{-- @if (Route::has('password.request'))
                 <a class="forgot-link " style="text-decoration: underline" href="{{ route('password.request') }}">
                     Forgot password?
                 </a>
-            @endif
+            @endif --}}
                </div>
             </form> 
 
