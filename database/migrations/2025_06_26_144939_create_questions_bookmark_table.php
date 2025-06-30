@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('chapter_question_id'); // Assuming this is needed, otherwise remove it
             $table->enum('bookmark', ['0','1','2','3'])->nullable();
             $table->timestamps();
-            $table->foreign('chapter_question_id')->references('chapter_question_id')->on('chapter_questions')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('chapter_question_id')->references('chapter_question_id')->on('chapterquestions')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreign('chapter_id')->references('chapter_id')->on('chapters')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreign('subject_id')->references('subject_id')->on('subjects')->cascadeOnDelete()->cascadeOnUpdate();

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Subject;
 use App\Models\SubjectTopic;
+use App\Models\Syllabus;
+use App\Models\SyllabusList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -14,22 +16,24 @@ class SubjectTopicController extends Controller
      * Display a listing of the resource.
      */
 
-     public function filterTopic(Request $request)
-{
-    $subjects = Subject::all();
+// public function filterTopic(Request $request)
+// {
+//     $syllabuses = Syllabus::all();
 
-    // Apply filter if subject_id is selected
-    $query = SubjectTopic::query();
-    
+//     $query = SyllabusList::query();
 
-    if ($request->filled('subject_id')) {
-        $query->where('subject_id', $request->subject_id);
-    }
+//     if ($request->filled('syallabus_id')) {
+//         $query->where('syallabus_id', $request->syallabus_id);
+//     }
 
-    $subjectTopics = $query->get(); // or paginate() if you use pagination
+//     $syllabusTopics = $query->get();
 
-    return view('pages.subject-topic.index', compact('subjects', 'subjectTopics'));
-}
+//     return view('pages.syllabus-list.index', [
+//         'syllabuses' => $syllabuses,
+//         'syllabusTopics' => $syllabusTopics
+//     ]);
+// }
+
     public function index()
     {
         // Fetch all subject topics from the database

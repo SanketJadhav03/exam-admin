@@ -12,6 +12,7 @@ use App\Http\Controllers\API\ChapterBookmarkApiController;
 use App\Http\Controllers\API\ChapterQuestionApiController;
 use App\Http\Controllers\API\StudentAuthController;
 use App\Http\Controllers\Api\SubjectApiController;
+use App\Http\Controllers\TestController;
 
 
 // Example API route
@@ -51,3 +52,4 @@ Route::post('/student/register', [StudentRegisterController::class, 'store']);
 
     Route::delete('/bookmark/{id}', [BookmarkApiController::class, 'destroy']);
     // /api/bookmark/1
+    Route::get('/get-random-questions', [TestController::class, 'getRandomQuestions']);

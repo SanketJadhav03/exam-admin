@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('subject_child', function (Blueprint $table) {
             $table->id('subject_child_id');
-            $table->unsignedBigInteger('subject_id');
+                
             $table->longText('subject_topic_name');
             $table->string('subject_topic_pdf')->nullable();
             $table->boolean('subject_topic_status')->default(true);

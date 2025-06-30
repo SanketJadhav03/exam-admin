@@ -14,11 +14,14 @@ use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\SubjectTopicController;
+use App\Http\Controllers\AffairCatController;
 use App\Http\Controllers\AllQuestionsController;
 use App\Http\Controllers\Api\ChapterApiController;
 use App\Http\Controllers\Api\SubjectApiController;
 use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\ChapterQuestionController;
+use App\Http\Controllers\SyllabusController;
+use App\Http\Controllers\SyllabusListController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -159,6 +162,12 @@ Route::get('/component', function () {
 
 Route::resource('/subject', SubjectController::class);
 Route::resource('/subject-topic', SubjectTopicController::class);
+Route::resource('/syllabus', SyllabusController::class);
+Route::resource('/syllabus-list',SyllabusListController::class);
+
+Route::resource('/affair',AffairCatController::class);
 Route::post('/admin/subject-topic/status', [SubjectTopicController::class, 'toggleStatus']);
 Route::get('/select-subject-topics', [SubjectTopicController::class, 'filterTopic'])->name('subject-topic.filterTopic');
+// Route::get('/select-syllabus-topic',[SyllabusListController::class , 'filterTopic'])->name('syllabus-list.filterTopic');
 
+Route::get('/syllabus-list/filter-topic', [SyllabusListController::class, 'filterTopic'])->name('syllabus-list.filterTopic');

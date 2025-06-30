@@ -136,39 +136,39 @@
                         </ul>
                     </li>
                     
-                    <li class="menu-item {{ request()->routeIs('categoryList') || request()->routeIs('categoryPostList') ? 'active open' : '' }}">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <li class="menu-item  }}">
+                        <a href="" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons ti ti-sitemap"></i> <!-- Category icon -->
-                            <div data-i18n="Category">Category</div>
+                            <div data-i18n="Syllabus">Syllabus</div>
                         </a>
                         <ul class="menu-sub">
-                            <li class="menu-item {{ request()->routeIs('categoryList') ? 'active' : '' }}">
-                                <a href="/admin/category" class="menu-link">
-                                    <div data-i18n="Category">Category</div>
+                            <li class="menu-item ">
+                                <a href="{{route('syllabus.index')}}" class="menu-link">
+                                    <div data-i18n="Syllabus">Syllabus</div>
                                 </a>
                             </li>
-                            <li class="menu-item {{ request()->routeIs('categoryPostList') ? 'active' : '' }}">
-                                <a href="/admin/category_post" class="menu-link">
-                                    <div data-i18n="Category Post">Category Post</div>
+                            <li class="menu-item ">
+                                <a href="{{route('syllabus-list.index')}}" class="menu-link">
+                                    <div data-i18n="Syllabus List">Syllabus List</div>
                                 </a>
                             </li>
                         </ul>
                     </li>
                     
-                    <li class="menu-item {{ request()->routeIs('customList') || request()->routeIs('customPostList') ? 'active open' : '' }}">
+                    <li class="menu-item ">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons ti ti-settings"></i> <!-- Custom icon -->
-                            <div data-i18n="Custom">Custom</div>
+                            <div data-i18n="Current Affair">Current Affair</div>
                         </a>
                         <ul class="menu-sub">
-                            <li class="menu-item {{ request()->routeIs('customList') ? 'active' : '' }}">
+                            <li class="menu-item {{route('affair.index')}}">
                                 <a href="/admin/custom" class="menu-link">
-                                    <div data-i18n="Custom">Custom</div>
+                                    <div data-i18n="Affair Category">Affair Category</div>
                                 </a>
                             </li>
-                            <li class="menu-item {{ request()->routeIs('customPostList') ? 'active' : '' }}">
+                            <li class="menu-item {{route('affair.index')}}">
                                 <a href="/admin/custom_post" class="menu-link">
-                                    <div data-i18n="Custom Post">Custom Post</div>
+                                    <div data-i18n="Custom Post">Affair Post</div>
                                 </a>
                             </li>
                         </ul>

@@ -1,5 +1,5 @@
 @extends('layouts.admin.master')
-@section('title', 'Festival Post')
+@section('title', 'Subject Topic')
 @section('content')
     <div class="container-fluid">
         <div class="card mt-2">
